@@ -1,0 +1,20 @@
+# 지금 당장에는 쓰이지 않음
+
+type Query {
+    info: String!
+    feed: [Link!]!
+    ## Fetch a single link by its `id`  #practice
+    # link(id: ID!): Link
+}
+type Mutation {
+    post(url: String!, description: String!): Link!
+    ## Update a link    #practice
+    # updateLink(id: ID!, url: String, description: String): Link
+    ## Delete a link    #practice
+    # deleteLink(id: ID!): Link 
+}
+type Link {
+    id: ID!
+    description: String!
+    url: String!
+}
