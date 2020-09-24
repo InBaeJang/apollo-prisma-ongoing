@@ -18,4 +18,4 @@ EXPOSE 4000
 CMD [ "npm", "run" ,"start" ]
 
 ## Docker run command
-# docker run -d -p 4000:4000 --network=host apollo-prisma:latest
+# docker run -d -p 4000:4000 --network=host apollo-prisma:[version]

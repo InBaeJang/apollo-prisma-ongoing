@@ -21,8 +21,13 @@ const typeDefs = gql`
     type Query {
         info: String!
         feed: [Link!]!
+        # feed(filter: String, skip: Int, first: Int, orderBy: LinkOrderByInput): Feed!
         ## Fetch a single link by its 'id'  #practice
         # link(id: ID!): Link
+    }
+    type Feed {
+        links: [Link!]!
+        count: Int!
     }
     type Mutation {
         post(url: String!, description: String!): Link!
@@ -61,14 +66,6 @@ const typeDefs = gql`
         user: User!
     }
 `
-
-// let links = [{
-//     id: 'link-0',
-//     url: 'www.howtographql.com',
-//     description: 'Fullstack tutorial for GraphQL'
-// }]
-// let idCount = links.length
-
 const resolvers = {
     Query,
     Mutation,
@@ -76,33 +73,6 @@ const resolvers = {
     User,
     Link,
     Vote
-    // Query: {
-    //     info: () => `This is the API of a Hackernews Clone`,
-    //     feed: async (parent, args, context) => {
-    //         return context.prisma.link.findMany()
-    //     }
-    // },
-    // Mutation: {
-    //     post: (parent, args, context, info) => {
-    //         const newLink = context.prisma.link.create({
-    //             data: {
-    //                 url: args.url,
-    //                 description: args.description,
-    //             },
-    //         })
-    //         return newLink
-    //     },
-    // 2
-    // post: (parent, args) => {
-    //     const link = {
-    //         id: `link-${idCount++}`,
-    //         description: args.description,
-    //         url: args.url,
-    //     }
-    //     links.push(link)
-    //     return link
-    // }
-    // },
 }
 
 const context = req => {
@@ -118,6 +88,7 @@ const server = new ApolloServer({
     resolvers,
     context
 })
+
 server.listen({ port: 4000 }).then(({ url }) => {
     console.log(`🚀  Server ready at ${url}`);
 });

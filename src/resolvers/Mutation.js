@@ -42,17 +42,6 @@ async function login(parent, args, context, info) {
 }
 
 function post(parent, args, context, info) {
-    //// before subscription
-    // const userId = getUserId(context)
-
-    // return context.prisma.link.create({
-    //     data: {
-    //         url: args.url,
-    //         description: args.description,
-    //         postedBy: { connect: { id: userId } },
-    //     }
-    // })
-
     //// after subscription
     const userId = getUserId(context)
 
@@ -66,6 +55,17 @@ function post(parent, args, context, info) {
     context.pubsub.publish("NEW_LINK", newLink)
 
     return newLink
+
+    //// before subscription
+    // const userId = getUserId(context)
+
+    // return context.prisma.link.create({
+    //     data: {
+    //         url: args.url,
+    //         description: args.description,
+    //         postedBy: { connect: { id: userId } },
+    //     }
+    // })
 }
 
 async function vote(parent, args, context, info) {
@@ -85,7 +85,8 @@ async function vote(parent, args, context, info) {
     if (Boolean(vote)) {
         throw new Error(`Already voted for link: ${args.linkId}`)
     }
-
+    console.log("userId: " + userId)
+    console.log("arges.linkId: " + args.linkId)
     // 3
     const newVote = context.prisma.vote.create({
         data: {
