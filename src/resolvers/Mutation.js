@@ -85,8 +85,6 @@ async function vote(parent, args, context, info) {
     if (Boolean(vote)) {
         throw new Error(`Already voted for link: ${args.linkId}`)
     }
-    console.log("userId: " + userId)
-    console.log("arges.linkId: " + args.linkId)
     // 3
     const newVote = context.prisma.vote.create({
         data: {
@@ -107,9 +105,16 @@ async function vote(parent, args, context, info) {
     return newVote
 }
 
+function deleteLink(parent, args, context, info) {
+    return context.prisma.link.delete({
+        where: { id: Number(args.id) }
+    })
+}
+
 module.exports = {
     signup,
     login,
     post,
-    vote
+    vote,
+    deleteLink
 }

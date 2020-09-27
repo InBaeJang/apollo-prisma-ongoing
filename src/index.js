@@ -37,7 +37,7 @@ const typeDefs = gql`
         ## Update a link    #practice
         # updateLink(id: ID!, url: String, description: String): Link
         ## Delete a link    #practice
-        # deleteLink(id: ID!): Link
+        deleteLink(id: ID!): Link
     }
     type Link {
         id: ID!
@@ -66,6 +66,7 @@ const typeDefs = gql`
         user: User!
     }
 `
+
 const resolvers = {
     Query,
     Mutation,
