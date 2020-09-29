@@ -1,10 +1,12 @@
+#!/usr/bin/env nodejs
+
 'use strict';
 
 // const { GraphQLServer } = require('graphql-yoga')
 const { ApolloServer, gql } = require('apollo-server')
-const { PrismaClient } = require('@prisma/client')
 const Query = require('./resolvers/Query')
 const Mutation = require('./resolvers/Mutation')
+const { PrismaClient } = require('@prisma/client')
 const User = require('./resolvers/User')
 const Link = require('./resolvers/Link')
 const Subscription = require('./resolvers/Subscription')
@@ -20,15 +22,27 @@ const prisma = new PrismaClient()
 const typeDefs = gql`
     type Query {
         info: String!
-        feed: [Link!]!
-        # feed(filter: String, skip: Int, first: Int, orderBy: LinkOrderByInput): Feed!
-        ## Fetch a single link by its 'id'  #practice
-        # link(id: ID!): Link
+        feed(filter: String, skip: Int, take: Int, orderBy: LinkOrderByInput): Feed!
+        # The start index is called skip
+        # The limit is called take, meaning you’re “taking” x elements after a provided start index
+
+        ## Fetch a single link by its 'id'
+        link(id: ID!): Link
     }
     type Feed {
         links: [Link!]!
         count: Int!
     }
+    input LinkOrderByInput {
+        description: Sort
+        url: Sort
+        createdAt: Sort
+    }
+    enum Sort {
+        asc
+        desc
+    }
+
     type Mutation {
         post(url: String!, description: String!): Link!
         signup(email: String!, password: String!, name: String!): AuthPayload
@@ -89,6 +103,7 @@ const server = new ApolloServer({
     resolvers,
     context
 })
+
 
 server.listen({ port: 4000 }).then(({ url }) => {
     console.log(`🚀  Server ready at ${url}`);

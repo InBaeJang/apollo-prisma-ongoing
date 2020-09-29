@@ -1,5 +1,3 @@
-
-
 function postedBy(parent, args, context) {
     return context.prisma.link.findOne({
         where: {
