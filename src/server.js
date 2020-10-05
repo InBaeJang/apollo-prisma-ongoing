@@ -12,7 +12,8 @@ const Link = require('./resolvers/Link')
 const Subscription = require('./resolvers/Subscription')
 const Vote = require('./resolvers/Vote')
 
-const { PubSub } = require('graphql-yoga');
+// const { PubSub } = require('graphql-yoga');
+const { PubSub } = require('apollo-server');
 const pubsub = new PubSub()
 
 // Prisma client
@@ -53,9 +54,11 @@ const typeDefs = gql`
         ## Delete a link    #practice
         deleteLink(id: ID!): Link
     }
+    scalar DateTime
     type Link {
         id: ID!
         description: String!
+        createdAt: DateTime!
         url: String!
         postedBy: User
         votes: [Vote!]!
@@ -96,6 +99,11 @@ const context = req => {
         prisma,
         pubsub
     }
+}
+
+const option = {
+    endpoint: "/graphql",
+    playground: true
 }
 
 const server = new ApolloServer({

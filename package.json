@@ -2,7 +2,7 @@
   "name": "hackernews-node",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/server.js"
@@ -20,8 +20,5 @@
   },
   "devDependencies": {
     "@prisma/cli": "^2.7.1"
-  },
-  "bin": {
-    "hello": "./bin/index.js"
   }
 }
