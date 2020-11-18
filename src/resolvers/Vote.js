@@ -14,7 +14,7 @@ function user(parent, args, context) {
     }).user()
 }
 
-module.exports = {
+export default {
     link,
     user,
 }

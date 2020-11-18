@@ -22,7 +22,7 @@ const newVote = {
     },
 }
 
-module.exports = {
+export default {
     newLink,
     newVote
 }

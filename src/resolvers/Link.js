@@ -14,7 +14,12 @@ function votes(parent, args, context) {
     }).votes()
 }
 
-module.exports = {
+export default {
     postedBy,
     votes
 }
+
+// module.exports = {
+//     postedBy,
+//     votes
+// }

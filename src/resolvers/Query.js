@@ -35,7 +35,7 @@ async function link(parent, args, context, info) {
     return oneLink
 }
 
-module.exports = {
+export default {
     info,
     feed,
     link

@@ -1,23 +1,19 @@
 #!/usr/bin/env nodejs
 
-'use strict';
+'use strict'
+import apolloServer from 'apollo-server'
+import Query from './resolvers/Query.js'
+import Mutation from './resolvers/Mutation.js'
+import prismaClient from '@prisma/client'
+import User from './resolvers/User.js'
+import Link from './resolvers/Link.js'
+import Subscription from './resolvers/Subscription.js'
+import Vote from './resolvers/Vote.js'
 
-// const { GraphQLServer } = require('graphql-yoga')
-const { ApolloServer, gql } = require('apollo-server')
-const Query = require('./resolvers/Query')
-const Mutation = require('./resolvers/Mutation')
-const { PrismaClient } = require('@prisma/client')
-const User = require('./resolvers/User')
-const Link = require('./resolvers/Link')
-const Subscription = require('./resolvers/Subscription')
-const Vote = require('./resolvers/Vote')
-
-// const { PubSub } = require('graphql-yoga');
-const { PubSub } = require('apollo-server');
-const pubsub = new PubSub()
-
-// Prisma client
+const { ApolloServer, gql, PubSub } = apolloServer
+const { PrismaClient } = prismaClient
 const prisma = new PrismaClient()
+const pubsub = new PubSub()
 
 // Graphql type definition
 const typeDefs = gql`
@@ -101,20 +97,15 @@ const context = req => {
     }
 }
 
-const option = {
-    endpoint: "/graphql",
-    playground: true
-}
-
 const server = new ApolloServer({
     typeDefs,
     resolvers,
-    context
+    context,
+    introspection: true,
+    playground: true
 })
 
 
 server.listen({ port: 4000 }).then(({ url }) => {
     console.log(`🚀  Server ready at ${url}`);
 });
-
-//server.start(() => console.log(`Server is running on http://localhost:4000`))

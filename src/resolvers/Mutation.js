@@ -1,6 +1,7 @@
-const bcrypt = require('bcryptjs')
-const jwt = require('jsonwebtoken')
-const { APP_SECRET, getUserId } = require('../utils')
+// import { hash, compare } from 'bcryptjs'
+import bcrypt from 'bcryptjs'
+import jwt from 'jsonwebtoken'
+import { APP_SECRET, getUserId } from '../utils/utils.js'
 
 async function signup(parent, args, context, info) {
     const password = await bcrypt.hash(args.password, 10)
@@ -97,7 +98,7 @@ function deleteLink(parent, args, context, info) {
     })
 }
 
-module.exports = {
+export default {
     signup,
     login,
     post,
