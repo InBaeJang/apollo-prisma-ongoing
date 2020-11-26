@@ -15,6 +15,8 @@ const { PrismaClient } = prismaClient
 const prisma = new PrismaClient()
 const pubsub = new PubSub()
 
+const port = 4000
+
 // Graphql type definition
 const typeDefs = gql`
     type Query {
@@ -106,6 +108,6 @@ const server = new ApolloServer({
 })
 
 
-server.listen({ port: 4000 }).then(({ url }) => {
+server.listen({ port: port }).then(({ url }) => {
     console.log(`🚀  Server ready at ${url}`);
 });
