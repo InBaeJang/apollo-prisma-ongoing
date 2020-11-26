@@ -1,4 +1,4 @@
-function link(parent, args, context) {
+function link(parent:any, args:any, context:any) {
     return context.prisma.vote.findOne({
         where: {
             id: parent.id
@@ -6,7 +6,7 @@ function link(parent, args, context) {
     }).link()
 }
 
-function user(parent, args, context) {
+function user(parent:any, args:any, context:any) {
     return context.prisma.vote.findOne({
         where: {
             id: parent.id
