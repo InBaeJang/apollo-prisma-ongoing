@@ -1,3 +1,32 @@
+# dotenv environment variables file
 .env
+<<<<<<< HEAD
 node_modules/
 .vscode/
+=======
+.env.test
+
+# Dependency directories
+node_modules/
+jspm_packages/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Diagnostic reports (https://nodejs.org/api/report.html)
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# build
+dist/
+>>>>>>> a83be367245671c313448c25b6f0e37ceade8d35

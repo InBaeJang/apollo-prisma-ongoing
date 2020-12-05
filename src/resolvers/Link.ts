@@ -1,4 +1,4 @@
-function postedBy(parent, args, context) {
+function postedBy(parent:any, args:any, context:any) {
     return context.prisma.link.findOne({
         where: {
             id: parent.id
@@ -6,7 +6,7 @@ function postedBy(parent, args, context) {
     }).postedBy()
 }
 
-function votes(parent, args, context) {
+function votes(parent:any, args:any, context:any) {
     return context.prisma.link.findOne({
         where: {
             id: parent.id

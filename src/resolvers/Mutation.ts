@@ -1,9 +1,9 @@
 // import { hash, compare } from 'bcryptjs'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
-import { APP_SECRET, getUserId } from '../utils/utils.js'
+import { APP_SECRET, getUserId } from '../utils/utils'
 
-async function signup(parent, args, context, info) {
+async function signup(parent:any, args:any, context:any, info:any) {
     const password = await bcrypt.hash(args.password, 10)
     const user = await context.prisma.user.create({ data: { ...args, password } })
     const token = jwt.sign({ userId: user.id }, APP_SECRET)
@@ -14,7 +14,7 @@ async function signup(parent, args, context, info) {
     }
 }
 
-async function login(parent, args, context, info) {
+async function login(parent:any, args:any, context:any, info:any) {
     const user = await context.prisma.user.findOne({ where: { email: args.email } })
     if (!user)
         throw new Error('No such user found')
@@ -31,7 +31,7 @@ async function login(parent, args, context, info) {
     }
 }
 
-function post(parent, args, context, info) {
+function post(parent:any, args:any, context:any, info:any) {
     //// after subscription
     const userId = getUserId(context)
 
@@ -58,7 +58,7 @@ function post(parent, args, context, info) {
     // })
 }
 
-async function vote(parent, args, context, info) {
+async function vote(parent:any, args:any, context:any, info:any) {
     const userId = getUserId(context)
 
     const vote = await context.prisma.vote.findOne({
@@ -92,7 +92,7 @@ async function vote(parent, args, context, info) {
     return newVote
 }
 
-function deleteLink(parent, args, context, info) {
+function deleteLink(parent:any, args:any, context:any, info:any) {
     return context.prisma.link.delete({
         where: { id: Number(args.id) }
     })

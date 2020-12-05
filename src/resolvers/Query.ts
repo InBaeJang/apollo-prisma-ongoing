@@ -1,10 +1,10 @@
 
 
-function info(parent, arges, context, info) {
+function info(parent:any, args:any, context:any, info:any) {
     return "This is the API of a Hackernews Clone"
 }
 
-async function feed(parent, args, context, info) {
+async function feed(parent:any, args:any, context:any, info:any) {
     const where = args.filter ? {
         OR: [
             { description: { contains: args.filter } },
@@ -28,7 +28,7 @@ async function feed(parent, args, context, info) {
     }
 }
 
-async function link(parent, args, context, info) {
+async function link(parent:any, args:any, context:any, info:any) {
     const oneLink = await context.prisma.link.findOne({
         where: { id: Number(args.id) }
     })
